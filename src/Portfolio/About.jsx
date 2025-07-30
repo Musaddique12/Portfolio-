@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaDownload } from "react-icons/fa";
+import CV from "./Musaddique_CV.pdf";
 
 const About = () => {
   return (
@@ -57,7 +58,7 @@ const About = () => {
 
         <div className="mt-8">
           <a
-            href="#"
+            href={CV}
             className="inline-flex items-center gap-2 bg-accent hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium transition"
           >
             <FaDownload /> Download CV

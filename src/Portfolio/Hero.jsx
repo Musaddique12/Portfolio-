@@ -6,6 +6,7 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { FaDownload, FaReact, FaFire, FaGlobe } from "react-icons/fa";
 import profile from "./profile.jpg"
+import CV from "./Musaddique_CV.pdf";
 
 const FloatingText = () => (
   <Float floatIntensity={2} speed={2} rotationIntensity={1}>
@@ -49,11 +50,15 @@ const Hero = () => {
 
         {/* Text and info */}
         <div className="text-center md:text-left max-w-xl">
-          <h1 className="text-4xl md:text-6xl font-bold mb-2">Musaddiqie Momin</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-2">Musaddique Momin</h1>
 
           <TypeAnimation
             sequence={[
-              "React Developer ⚛️",
+              "React Specialist ⚛️",
+              2000,
+              "Web Developer 🌐",
+              2000,
+              "Software Developer 💻",
               2000,
               "Web3 & Firebase Explorer 🚀",
               2000,
@@ -73,7 +78,7 @@ const Hero = () => {
 
           <div className="mt-6 flex flex-col sm:flex-row items-center gap-4">
             <a
-              href="/Momin_CV.pdf"
+              href={CV}
               download
               className="bg-cyan-400 hover:bg-cyan-500 text-black px-6 py-3 rounded-md font-bold inline-flex items-center gap-2 transition"
             >

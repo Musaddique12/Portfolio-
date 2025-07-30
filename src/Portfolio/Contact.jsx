@@ -1,32 +1,59 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { FaGithub, FaLinkedin, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const Contact = () => {
+  const [name,setName]=useState("");
+  const [message,setMessage]=useState("");
+  const [email,setEmail]=useState("");
   const form = useRef();
+  const [isSubmitimg, setIsSubmiting] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
+    isSubmitimg(true);
+    console.log("Sending email...");
+
+    const serviceId = "service_3stk9sa";
+    const templateId = "template_a4d5xc9";
+    const publicId = "SSNfluYGgn5Vz36qL";
+
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      to_email: "musaddique.webdev@gmail.com",
+      message: message,
+    }
+
+
     emailjs
-      .sendForm(
-        "service_xxxxxxx", // Replace with your EmailJS service ID
-        "template_xxxxxxx", // Replace with your template ID
-        form.current,
-        "your_user_id" // Replace with your EmailJS public key
+      .send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicId
       )
       .then(() => {
+        console.log("Email sent successfully!");
         toast.success("📬 Message sent successfully!");
         form.current.reset();
+        setName("");
+        setEmail("");
+        setMessage("");
+        setIsSubmiting(false);
       })
-      .catch(() => {
+      .catch((error) => {
         toast.error("❌ Failed to send message. Please try again.");
+        console.error("Failed to send email:", error);
+        setIsSubmiting(false);
       });
   };
 
   return (
     <section id="contact" className="py-20 px-6 md:px-20 bg-primary text-light">
+      <Toaster/>
       <div className="max-w-5xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
@@ -74,6 +101,8 @@ const Contact = () => {
             <input
               type="text"
               name="user_name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               placeholder="Your Name"
               required
               className="w-full p-3 rounded bg-[#1e293b] border border-accent/30 text-light outline-none"
@@ -81,12 +110,16 @@ const Contact = () => {
             <input
               type="email"
               name="user_email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               placeholder="Your Email"
               required
               className="w-full p-3 rounded bg-[#1e293b] border border-accent/30 text-light outline-none"
             />
             <textarea
               name="message"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
               rows="5"
               placeholder="Your Message"
               required
@@ -94,6 +127,8 @@ const Contact = () => {
             ></textarea>
             <button
               type="submit"
+              disabled={isSubmitimg}
+              onClick={() => setIsSubmiting(true)}
               className="bg-accent text-white px-6 py-3 rounded hover:bg-blue-600 transition text-sm font-semibold"
             >
               📩 Send Message

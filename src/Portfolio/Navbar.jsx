@@ -25,7 +25,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center text-white">
         <h1 className="text-xl md:text-2xl font-bold text-accent tracking-widest">
-          Musaddiqie.dev 🚀
+          Musaddique.dev 🚀
         </h1>
 
         <div className="md:hidden text-2xl" onClick={toggleMenu}>
